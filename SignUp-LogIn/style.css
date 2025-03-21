@@ -1,0 +1,380 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    width: 100%;
+}
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    background-color: #000;
+}
+
+.navbar ul li {
+    position: relative;
+}
+
+.navbar ul li a {
+    color: white;
+    padding: 15px 20px;
+    display: block;
+    text-decoration: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.nav_menu {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 90px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown .nav_menu {
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 90px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .nav_menu {
+    display: block;
+}
+.navbar ul li a:hover {
+    background-color: #444;
+}
+
+/* Search Bar */
+.search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0 20px;
+    padding-right: 133px;
+}
+
+
+.search-bar {
+    width: 300px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    outline: none;
+    text-align: center;
+    background-color: #444;
+    color: white;
+    transition: 0.3s ease-in-out;
+}
+
+.search-bar::placeholder {
+    color: #ccc;
+}
+
+.search-bar:focus::placeholder {
+    color: transparent;
+}
+
+/* Right Side - Login, Signup, Cart */
+.user-actions {
+    display: flex;
+    align-items: center;
+}
+
+.user-actions .btn {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin-left: 10px;
+    transition: 0.3s;
+}
+
+.user-actions .btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Cart */
+.cart {
+    margin-left: 15px;
+    font-size: 18px;
+    position: relative;
+}
+
+.cart a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+/* Form Container */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: left; /* Align text to the left */
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center; /* Center the heading */
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.login-container input[type="text"],
+.login-container input[type="email"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px; /* Add space below each input */
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.login-container input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 10px; /* Add space below the button */
+}
+
+.login-container button:hover {
+    background-color: #218838;
+}
+
+.login-container a {
+    color: #007bff;
+    text-decoration: none;
+    display: block;
+    margin: 10px 0;
+    text-align: center; /* Center the links */
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+/* Footer */
+footer {
+    background-color: #222;
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footer-column h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin: 8px 0;
+}
+
+.footer-column ul li a {
+    color: #ddd;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+    color: #ff4c4c;
+}
+
+.social-links a {
+    color: white;
+    margin: 0 10px;
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: #ff4c4c;
+}
+
+.footer-bottom {
+    border-top: 1px solid #444;
+    padding-top: 15px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+/* Chatbox */
+.chatbox {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: #1a1a1a;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(0);
+}
+
+.chatbox.collapsed {
+    height: 300px;
+}
+
+.chatbox-header {
+    background-color: #0066cc;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.chatbox-header span {
+    font-size: 1rem;
+}
+
+.chatbox-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.chatbox-body {
+    padding: 10px;
+    display: none;
+}
+
+.chatbox-body.open {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: #333;
+    color: white;
+    
+}
+
+.chatbox-submit {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+.chatbox-submit:hover {
+    background-color: #005bb5;
+}
+.messageDiv{
+    background-color:hsl(327,90%,28%);
+    color:white;
+    padding:10px 20px;
+    margin:10px;
+    border-radius: 5px;
+    font-size:1rem;
+    opacity:0;
+    animation:fadeOut 7s forwards;
+
+}
+

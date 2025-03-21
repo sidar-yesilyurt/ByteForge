@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechVault</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module"  src="index.js" ></script>
+</head>
+<body>
+    <!-- Header with Logo -->
+    <header>
+        <h1>Byte Forge</h1>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../Amani_Eva/About.html">About</a></li>
+            <li class="dropdown">
+                <a href="/Products/Products.html" class="dropbtn">Products</a>
+                <ul class="nav_menu">
+                    <li><a href="Products/PCs.html">PCs</a></li>
+                    <li><a href="Products/Hardware.html">Hardware</a></li>
+                    <li><a href="Products/Consoles.html">Consoles</a></li>
+                    <li><a href="Products/Accessories.html">Accessories</a></li>
+                </ul>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search anything...">
+        </div>
+
+        <!-- Right Side: Login, Sign Up, and Cart -->
+        <div class="user-actions" id="logged-out-actions">
+            <a href="SignUp-LogIn/auth.html?form=login" class="btn">Login</a>
+            <a href="SignUp-LogIn/auth.html?form=signup" class="btn">Sign Up</a>
+            <div class="cart">
+                <a href="cart.html">
+                    🛒 <span id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Side: User Name and Logout -->
+        <div class="user-actions" id="logged-in-actions" style="display: none;">
+            <span id="userName"></span>
+            <button id="logout">Logout</button>
+            <div class="cart">
+                <a href="cart.html">
+                    🛒 <span id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-text">
+                <h2>Want to Upgrade Your PC?</h2>
+                <p>Explore the latest tech and build your dream setup today.</p>
+                <a href="/Products/Products.html" class="btn-cta">Shop Now</a>
+            </div>
+            <div class="hero-image">
+                <img src="upgrade.JPG" alt="Upgrade your PC?" width="590" height="250" class="curved-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Carousel Section -->
+    <section class="carousel">
+        <div class="carousel-container">
+            <div class="carousel-slide">
+                <img src="CarouselImages/image1.jpg" alt="Image 1">
+                <img src="CarouselImages/image2.jpg" alt="Image 2">
+                <img src="CarouselImages/image3.jpg" alt="Image 3">
+            </div>
+            <!-- Buttons -->
+            <button class="carousel-button prev">&#10094;</button>
+            <button class="carousel-button next">&#10095;</button>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="featured-products">
+        <h2>Featured Products</h2>
+        <div class="product-grid" id="product-grid">
+            <!-- Products will be dynamically inserted here -->
+        </div>
+
+        <!-- Shop More Button -->
+        <div class="shop-more-container">
+            <a href="/Products/Products.html" class="shop-more-button">Shop More</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p>Email: support@techstore.com</p>
+                <p>Phone: 02087655897</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="Amani_Eva/About.html">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><img src="MediaLogos/x.png" alt="Twitter" height="25" width="25"></a>
+                    <a href="#"><img src="MediaLogos/Instagram.png" alt="Instagram" height="25" width="25"></a>
+                    <a href="#"><img src="MediaLogos/Facebook.png" alt="LinkedIn" height="25" width="25"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ByteForge. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Chatbox -->
+    <div class="chatbox">
+        <div class="chatbox-header">
+            <span>Chat with us</span>
+            <button class="chatbox-toggle">-</button>
+        </div>
+        <div class="chatbox-body">
+            <form id="chat-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="question">Question:</label>
+                    <textarea id="question" name="question" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="chatbox-submit">Send</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

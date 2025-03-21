@@ -1,0 +1,202 @@
+/* Cart Layout */
+.cart-layout {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+/* Left Side: Item Details */
+.item-details {
+    flex: 2;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item {
+    margin-bottom: 20px;
+}
+
+.cart-item .item-sku {
+    font-size: 14px;
+    color: #666;
+}
+
+.cart-item .item-name {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.cart-item .item-price {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.remove-item {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.remove-item:hover {
+    background: #c82333;
+}
+
+.quantity-selector {
+    margin: 20px 0;
+}
+
+.quantity-selector label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.quantity-selector select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.item-status {
+    margin: 20px 0;
+}
+
+.item-status .stock-status {
+    color: green;
+    font-weight: bold;
+}
+
+.item-status .finance-info {
+    color: #666;
+    font-size: 14px;
+}
+
+.finance-options {
+    margin-top: 20px;
+}
+
+.finance-option {
+    margin-bottom: 15px;
+}
+
+.finance-option p {
+    margin: 5px 0;
+}
+
+.checkout-options {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.checkout-options button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.checkout-options button:hover {
+    background: #218838;
+}
+
+/* Right Side: Basket Summary */
+.basket-summary {
+    flex: 1;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.basket-summary h2 {
+    margin-bottom: 20px;
+}
+
+.summary-details p {
+    margin: 10px 0;
+}
+
+.alternative-payments {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.payment-options {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.payment-options button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.payment-options button:hover {
+    background: #0056b3;
+}
+
+.save-basket {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.save-basket-btn {
+    background: #ffc107;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.save-basket-btn:hover {
+    background: #e0a800;
+}
+
+.email-basket {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.email-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.email-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.email-form button {
+    padding: 10px 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.email-form button:hover {
+    background: #0056b3;
+}
