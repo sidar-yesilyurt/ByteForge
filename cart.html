@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="cart.css">
     <link rel="stylesheet" href="style.css">
     <script src="cart.js"></script>
+    <script type="module"  src="index.js" ></script>
+
 
     
 </head>
@@ -18,10 +20,18 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="/Amani_Eva/About.html">About</a></li>
-            <li><a href="Products/Products.html">Products</a></li>
-            <li><a href="contact.html">FAQ</a></li>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../Amani_Eva/About.html">About</a></li>
+            <li class="dropdown">
+                <a href="/Products/Products.html" class="dropbtn">Products</a>
+                <ul class="nav_menu">
+                    <li><a href="Products/PCs.html">PCs</a></li>
+                    <li><a href="Products/Hardware.html">Hardware</a></li>
+                    <li><a href="Products/Consoles.html">Consoles</a></li>
+                    <li><a href="Products/Accessories.html">Accessories</a></li>
+                </ul>
+            </li>
+            <li><a href="FAQ.html">FAQ</a></li>
         </ul>
 
         <!-- Search Bar -->
@@ -30,9 +40,20 @@
         </div>
 
         <!-- Right Side: Login, Sign Up, and Cart -->
-        <div class="user-actions">
+        <div class="user-actions" id="logged-out-actions">
             <a href="SignUp-LogIn/auth.html?form=login" class="btn">Login</a>
             <a href="SignUp-LogIn/auth.html?form=signup" class="btn">Sign Up</a>
+            <div class="cart">
+                <a href="cart.html">
+                    🛒 <span id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Side: User Name and Logout -->
+        <div class="user-actions" id="logged-in-actions" style="display: none;">
+            <span id="userName"></span>
+            <button id="logout">Logout</button>
             <div class="cart">
                 <a href="cart.html">
                     🛒 <span id="cart-count">0</span>

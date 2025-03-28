@@ -185,10 +185,12 @@ products.forEach(product => {
     const productElement = document.createElement("div");
     productElement.classList.add("product");
     productElement.innerHTML = `
-        <img src="${product.image}" alt="${product.name}" width="100" height="200">
-        <h3>${product.name}</h3>
-        <p>$${product.price}</p>
-        <a href="#" class="btn add-to-cart" data-id="${product.id}">Add to Cart</a>
+        <a href="product-details.html?id=${product.id}">
+            <img src="${product.image}" alt="${product.name}" width="100" height="200">
+            <h3>${product.name}</h3>
+            <p>$${product.price}</p>
+        </a>
+        <button class="btn add-to-cart" data-id="${product.id}">Add to Cart</button>
     `;
     productGrid.appendChild(productElement);
 });

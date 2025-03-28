@@ -1,3 +1,4 @@
+// products.js
 document.addEventListener("DOMContentLoaded", function() {
     const productGrid = document.querySelector(".product-grid");
     
@@ -8,78 +9,88 @@ document.addEventListener("DOMContentLoaded", function() {
     function createProductHTML(product) {
         return `
             <div class="product">
-                <img src="${product.image}" alt="${product.name}" width="100" height="200">
-                <h3>${product.name}</h3>
-                <p>$${product.price.toFixed(2)}</p>
-                <a href="#" class="btn add-to-cart" data-id="${product.id}">Add to Cart</a>
+                <a href="product-details.html?id=${product.id}" class="product-link">
+                    <img src="${product.image}" alt="${product.name}" width="100" height="200">
+                    <h3>${product.name}</h3>
+                    <p>$${product.price.toFixed(2)}</p>
+                </a>
+                <button class="btn add-to-cart" data-id="${product.id}">Add to Cart</button>
             </div>
         `;
     }
 
     // Function to append products to the DOM
     function appendProducts(products) {
+        productGrid.innerHTML = ''; // Clear existing products
         products.forEach(product => {
             const productHTML = createProductHTML(product);
             productGrid.innerHTML += productHTML;
         });
     }
 
-    // Append products based on the current page
-    if (window.location.pathname.includes("Accessories.html")) {
-        appendProducts(accessories);
-    } else if (window.location.pathname.includes("Consoles.html")) {
-        appendProducts(consoles);
-    } else if (window.location.pathname.includes("Hardware.html")) {
-        appendProducts(hardware);
-    } else if (window.location.pathname.includes("PCs.html")) {
-        appendProducts(PCs);
-    } else if (window.location.pathname.includes("Products.html")) {
-        // Show all products on the main products page
-        appendProducts([...PCs, ...hardware, ...consoles, ...accessories]);
+    // Determine which products to show based on URL
+    const path = window.location.pathname;
+    let productsToShow = [];
+    
+    if (path.includes("Accessories.html")) {
+        productsToShow = getProductsByCategory('accessories');
+    } else if (path.includes("Consoles.html")) {
+        productsToShow = getProductsByCategory('consoles');
+    } else if (path.includes("Hardware.html")) {
+        productsToShow = getProductsByCategory('hardware');
+    } else if (path.includes("PCs.html")) {
+        productsToShow = getProductsByCategory('PCs');
+    } else if (path.includes("Products.html")) {
+        productsToShow = getAllProducts();
     }
 
+    appendProducts(productsToShow);
+
     // Add event listeners for "Add to Cart" buttons
-    document.querySelectorAll('.product .btn').forEach(button => {
-        button.addEventListener('click', function(e) {
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('add-to-cart')) {
             e.preventDefault();
+            e.stopPropagation();
             
-            // Get product info from parent element
-            const productElement = this.closest('.product');
-            const productId = this.getAttribute('data-id');
-            const productName = productElement.querySelector('h3').textContent;
-            const productPrice = parseFloat(productElement.querySelector('p').textContent.replace('$', ''));
-            const productImage = productElement.querySelector('img').getAttribute('src');
+            const productId = parseInt(e.target.getAttribute('data-id'));
+            const product = getProductById(productId);
             
-            // Add product to cart
-            addToCart({
-                id: parseInt(productId),
-                name: productName,
-                price: productPrice,
-                image: productImage
-            });
-            
-        });
+            if (product) {
+                // Ensure correct image path before adding to cart
+                const productWithCorrectImage = {
+                    ...product,
+                    image: product.image.startsWith('Products/ProductImages/') 
+                        ? product.image 
+                        : `Products/ProductImages/${product.image.split('/').pop()}`
+                };
+                addToCart(productWithCorrectImage);
+            }
+        }
     });
     
+    // Cart functions
     function addToCart(item) {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         const existingItem = cart.find(cartItem => cartItem.id === item.id);
     
-        // Ensure the image path is absolute
-        const absoluteImagePath = `/Products/${item.image}`;
+        // Ensure the image path is correct
+        const correctImagePath = item.image.startsWith('Products/ProductImages/') 
+            ? item.image 
+            : `Products/ProductImages/${item.image.split('/').pop()}`;
     
         if (existingItem) {
-            existingItem.quantity += 1; // Increase quantity if item already exists
+            existingItem.quantity += 1;
         } else {
-            item.quantity = 1; // Add new item with quantity 1
-            item.image = absoluteImagePath; // Update the image path to absolute
-            cart.push(item);
+            cart.push({
+                ...item,
+                quantity: 1,
+                image: correctImagePath
+            });
         }
     
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
     }
-
     function updateCartCount() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         const cartCount = document.getElementById('cart-count');

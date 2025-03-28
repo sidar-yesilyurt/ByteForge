@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Byte Forge</title>
+    <link rel="stylesheet" href="Products.css">
+    <style>
+        .product-details-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            gap: 40px;
+        }
+        .product-image-container {
+            flex: 1;
+        }
+        .product-info-container {
+            flex: 1;
+        }
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .product-price {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #2c3e50;
+        }
+        .product-actions {
+            margin-top: 30px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background-color: #2ecc71;
+        }
+        .delivery-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Byte Forge</h1>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../Amani_Eva/About.html">About</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn" onclick="return false;">Products</a>
+                <ul class="nav_menu">
+                    <li><a href="PCs.html">PCs</a></li>
+                    <li><a href="Hardware.html">Hardware</a></li>
+                    <li><a href="Consoles.html">Consoles</a></li>
+                    <li><a href="Accessories.html">Accessories</a></li>
+                </ul>
+            </li>
+            <li><a href="../FAQ.html">FAQ</a></li>
+        </ul>
+
+        <div class="search-container">
+            <input type="text" class="search-bar" placeholder="Search anything...">
+        </div>
+
+        <div class="user-actions" id="logged-out-actions">
+            <a href="SignUp-LogIn/auth.html?form=login" class="btn">Login</a>
+            <a href="SignUp-LogIn/auth.html?form=signup" class="btn">Sign Up</a>
+            <div class="cart">
+                <a href="../cart.html">
+                    🛒 <span id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="user-actions" id="logged-in-actions" style="display: none;">
+            <span id="userName"></span>
+            <button id="logout">Logout</button>
+            <div class="cart">
+                <a href="../cart.html">
+                    🛒 <span id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Product Details Section -->
+    <div class="product-details-container">
+        <div class="product-image-container">
+            <img id="product-image" class="product-image" src="" alt="">
+        </div>
+        <div class="product-info-container">
+            <h1 id="product-name"></h1>
+            <p class="product-price" id="product-price"></p>
+            <p id="product-description">Premium quality product with advanced features.</p>
+            
+            <div class="delivery-info">
+                <p>🛳️ FREE DELIVERY ON YOUR ENTIRE ORDER</p>
+                <p>⏱️ Order now and get it tomorrow</p>
+            </div>
+            
+            <div class="product-actions">
+                <button id="add-to-cart" class="btn btn-primary">ADD TO BASKET</button>
+                <p id="stock-status">✅ IN STOCK</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p>Email: support@techstore.com</p>
+                <p>Phone: 02087655897</p>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><img src="MediaLogos/x.png" alt="Twitter" height="25" width="25"></a>
+                    <a href="#"><img src="MediaLogos/Instagram.png" alt="Instagram" height="25" width="25"></a>
+                    <a href="#"><img src="MediaLogos/Facebook.png" alt="LinkedIn" height="25" width="25"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Tech Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="storage.js"></script>
+    <script>
+        // Get product ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get('id'));
+        
+        // Load product data
+        const product = getProductById(productId);
+        
+        if (product) {
+            // Update page with product details
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-price').textContent = `$${product.price.toFixed(2)}`;
+            document.getElementById('product-image').src = product.image;
+            document.getElementById('product-image').alt = product.name;
+            document.title = `${product.name} | Byte Forge`;
+            
+            // Add to cart functionality
+            document.getElementById('add-to-cart').addEventListener('click', function() {
+                addToCart({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image
+                });
+                updateCartCount();
+            });
+        } else {
+            // Product not found
+            document.getElementById('product-name').textContent = "Product not found";
+            document.title = "Product Not Found | Byte Forge";
+        }
+        
+        // Cart functions
+        function addToCart(item) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existingItem = cart.find(cartItem => cartItem.id === item.id);
+
+        // Ensure the image path is correct
+        const correctImagePath = item.image.startsWith('Products/ProductImages/') 
+            ? item.image 
+            : `Products/ProductImages/${item.image.split('/').pop()}`;
+
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({
+                ...item,
+                quantity: 1,
+                image: correctImagePath
+            });
+        }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+}
+        
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartCount = document.getElementById('cart-count');
+            if (cartCount) {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCount.textContent = totalItems;
+            }
+        }
+        
+        // Initialize cart count
+        updateCartCount();
+    </script>
+</body>
+</html>

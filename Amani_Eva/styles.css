@@ -1,59 +1,182 @@
 /* General Styles */
-body {
-    font-family: Arial, sans-serif;
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #121212;
-    color: #fff;
+}
+/* Header */
+header {
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Navbar */
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+}
+
+/* General Styling */
+nav {
+    background-color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  nav a {
+    color: black;
+    text-decoration: none;
+    padding: 10px 15px;
+  }
+  
+  nav a:hover {
+    background-color: #555;
+  }
+  
+ /* Navigation Bar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1e1e1e;
-    padding: 15px 50px;
+    background-color: #333;
+    padding: 10px 20px;
 }
 
-.navbar .logo img {
-    height: 60px;
-}
-
-.nav-links {
-    list-style: none;
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
     display: flex;
-    gap: 20px;
+    background-color: #000;
 }
 
-.nav-links li {
-    display: inline;
+.navbar ul li {
+    position: relative;
 }
 
-.nav-links a {
+.navbar ul li a {
+    color: white;
+    padding: 15px 20px;
+    display: block;
     text-decoration: none;
-    color: #fff;
-    font-size: 18px;
-    transition: 0.3s;
 }
 
-.nav-links a:hover, .nav-links .active {
-    color: #6a5acd;
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
 
-.auth-buttons button {
+.nav_menu {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 90px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown .nav_menu {
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 90px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .nav_menu {
+    display: block;
+}
+.navbar ul li a:hover {
+    background-color: #444;
+}
+
+
+/* Search Bar */
+.search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    margin: 0 20px;
+    padding-right: 133px;
+}
+
+.search-bar {
+    width: 300px;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    outline: none;
+    text-align: center;
     background-color: #444;
     color: white;
-    border: none;
-    padding: 10px 15px;
-    margin-left: 10px;
-    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.search-bar::placeholder {
+    color: #ccc;
+}
+
+.search-bar:focus::placeholder {
+    color: transparent;
+}
+
+/* Right Side - Login, Signup, Cart */
+.user-actions {
+    display: flex;
+    align-items: center;
+}
+
+#logged-out-actions, #logged-in-actions {
+    display: flex;
+    align-items: center;
+}
+
+#logged-in-actions {
+    display: none; /* Initially hidden */
+}
+.user-actions .btn {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 12px;
     border-radius: 5px;
+    margin-left: 10px;
     transition: 0.3s;
 }
 
-.auth-buttons button:hover {
-    background-color: #6a5acd;
+.user-actions .btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Cart */
+.cart {
+    margin-left: 15px;
+    font-size: 18px;
+    position: relative;
+}
+
+.cart a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    padding: 20px;
 }
 
 /* About Section */
@@ -75,29 +198,91 @@ body {
 }
 
 /* Footer */
+footer {
+    background: #222;
+    color: white;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.curved-image {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+footer {
+    background-color: #222;
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+}
+
 .footer-container {
     display: flex;
     justify-content: space-around;
-    background-color: #1e1e1e;
-    padding: 30px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 20px;
 }
 
-.footer-container h3 {
+.footer-column {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footer-column h3 {
+    font-size: 18px;
     margin-bottom: 15px;
+    text-transform: uppercase;
+}
+.footer-column p {
+    color: white;
 }
 
-.footer-container a {
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin: 8px 0;
+}
+
+.footer-column ul li a {
+    color: #ddd;
     text-decoration: none;
-    color: #bbb;
-    transition: 0.3s;
+    transition: color 0.3s;
 }
 
-.footer-container a:hover {
-    color: #6a5acd;
+.footer-column ul li a:hover {
+    color: #ff4c4c;
 }
 
-.copyright {
-    text-align: center;
-    padding: 15px;
-    background-color: #111;
+.social-links a {
+    color: white;
+    margin: 0 10px;
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: #ff4c4c;
+}
+
+.footer-bottom {
+    border-top: 1px solid #444;
+    padding-top: 15px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+#userName {
+    color: white; /* Set the text color to white */
+    font-size: 16px; /* Adjust font size if needed */
+    margin-right: 10px; /* Add some spacing between the name and the logout button */
+    font-weight: bold; /* Optional: Make the text bold */
 }
