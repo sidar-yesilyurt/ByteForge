@@ -70,26 +70,26 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Cart functions
     function addToCart(item) {
+            console.log("Adding item to cart:", item); // Debugging: Log the item being added
+
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         const existingItem = cart.find(cartItem => cartItem.id === item.id);
-    
-        // Ensure the image path is correct
-        const correctImagePath = item.image.startsWith('Products/ProductImages/') 
-            ? item.image 
-            : `Products/ProductImages/${item.image.split('/').pop()}`;
     
         if (existingItem) {
             existingItem.quantity += 1;
         } else {
             cart.push({
                 ...item,
-                quantity: 1,
-                image: correctImagePath
+                quantity: 1
             });
         }
     
         localStorage.setItem('cart', JSON.stringify(cart));
-        updateCartCount();
+        
+        // Call the global update function
+        if (typeof updateCartCount === 'function') {
+            updateCartCount();
+        }
     }
     function updateCartCount() {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];

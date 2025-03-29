@@ -1,16 +1,26 @@
+// Make updateCartCount globally available
+window.updateCartCount = function() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCountElements = document.querySelectorAll('#cart-count');
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    
+    cartCountElements.forEach(element => {
+        element.textContent = totalItems;
+    });
+};
+
 // Function to render cart items
 function renderCartItems() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartItemsContainer = document.getElementById('cart-items');
     const subtotalElement = document.getElementById('subtotal');
-    const cartCountElement = document.getElementById('cart-count');
 
-    // Clear existing items
-    cartItemsContainer.innerHTML = '';
+    if (!cartItemsContainer || !subtotalElement) return;
+
+    cartItemsContainer.innerHTML = "";
 
     let subtotal = 0;
 
-    // Render each item in the cart
     cart.forEach((item, index) => {
         const itemElement = document.createElement('div');
         itemElement.classList.add('cart-item');
@@ -27,16 +37,11 @@ function renderCartItems() {
             <button class="remove-item" data-index="${index}">Remove item</button>
         `;
         cartItemsContainer.appendChild(itemElement);
-
         subtotal += parseFloat(item.price) * item.quantity;
     });
 
-    // Update subtotal
     subtotalElement.textContent = subtotal.toFixed(2);
-
-    // Update cart count
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartCountElement.textContent = totalItems;
+    updateCartCount();
 }
 
 // Function to update quantity
@@ -46,37 +51,39 @@ function updateQuantity(index, change) {
 
     if (item) {
         item.quantity += change;
-
         if (item.quantity <= 0) {
-            cart.splice(index, 1); // Remove item if quantity is 0
+            cart.splice(index, 1);
         }
-
         localStorage.setItem('cart', JSON.stringify(cart));
-        renderCartItems(); // Re-render the cart
+        renderCartItems();
+        updateCartCount();
     }
 }
 
-// Function to remove an item from the cart
+// Function to remove an item
 function removeItem(index) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart.splice(index, 1); // Remove the item at the specified index
+    cart.splice(index, 1);
     localStorage.setItem('cart', JSON.stringify(cart));
-    renderCartItems(); // Re-render the cart
+    renderCartItems();
+    updateCartCount();
 }
 
-// Event listeners for quantity controls and remove buttons
+// Event delegation for cart controls
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('decrease-quantity')) {
-        const index = e.target.getAttribute('data-index');
-        updateQuantity(index, -1);
+        updateQuantity(e.target.dataset.index, -1);
     } else if (e.target.classList.contains('increase-quantity')) {
-        const index = e.target.getAttribute('data-index');
-        updateQuantity(index, 1);
+        updateQuantity(e.target.dataset.index, 1);
     } else if (e.target.classList.contains('remove-item')) {
-        const index = e.target.getAttribute('data-index');
-        removeItem(index);
+        removeItem(e.target.dataset.index);
     }
 });
 
-// Render cart items on page load
-document.addEventListener('DOMContentLoaded', renderCartItems);
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('cart-items')) {
+        renderCartItems();
+    }
+    updateCartCount();
+});
