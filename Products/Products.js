@@ -70,8 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Cart functions
     function addToCart(item) {
-            console.log("Adding item to cart:", item); // Debugging: Log the item being added
-
+        console.log("Adding item to cart:", item);
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         const existingItem = cart.find(cartItem => cartItem.id === item.id);
     
@@ -87,14 +86,8 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.setItem('cart', JSON.stringify(cart));
         
         // Call the global update function
-        if (typeof updateCartCount === 'function') {
-            updateCartCount();
+        if (typeof window.updateCartCount === 'function') {
+            window.updateCartCount();
         }
-    }
-    function updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const cartCount = document.getElementById('cart-count');
-        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        cartCount.textContent = totalItems;
     }
 });

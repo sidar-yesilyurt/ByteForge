@@ -82,37 +82,37 @@ if (window.location.pathname.endsWith('index.html') || window.location.pathname 
             id: 1,
             name: "Laptop",
             price: 999.99,
-            image: "ProductImagesMain/laptop.JPG"
+            image: "Products/ProductImages/laptop.JPG"
         },
         {
             id: 2,
             name: "Watch",
             price: 499.99,
-            image: "ProductImagesMain/watch.JPG"
+            image: "Products/ProductImages/watch.JPG"
         },
         {
             id: 3,
             name: "Noise-Canceling Headphones",
             price: 129.99,
-            image: "ProductImagesMain/headphones.JPG"
+            image: "Products/ProductImages/headphones.JPG"
         },
         {
             id: 4,
             name: "57\" Monitor 240Hz",
             price: 799.99,
-            image: "ProductImagesMain/monitor.JPG"
+            image: "Products/ProductImages/monitor.JPG"
         },
         {
             id: 5,
             name: "Wireless Gaming Mouse",
             price: 79.99,
-            image: "ProductImagesMain/mouse.JPG"
+            image: "Products/ProductImages/mouse.JPG"
         },
         {
             id: 6,
             name: "GeForce Graphics Card",
             price: 249.99,
-            image: "ProductImagesMain/graphicscard.JPG"
+            image: "Products/ProductImages/graphicscard.JPG"
         }
     ];
 
@@ -123,7 +123,7 @@ if (window.location.pathname.endsWith('index.html') || window.location.pathname 
             const productElement = document.createElement("div");
             productElement.classList.add("product");
             productElement.innerHTML = `
-                <a href="product-details.html?id=${product.id}">
+                <a href="Products/product-details.html?id=${product.id}">
                     <img src="${product.image}" alt="${product.name}" width="100" height="200">
                     <h3>${product.name}</h3>
                     <p>$${product.price}</p>
@@ -163,8 +163,6 @@ function addToCart(item) {
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCartCount();
 }
-
-// Add this to your existing index.js (with other global functions)
 window.updateCartCount = function() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartCountLoggedOut = document.querySelector('#logged-out-actions #cart-count');

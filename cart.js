@@ -9,7 +9,6 @@ window.updateCartCount = function() {
     });
 };
 
-// Function to render cart items
 function renderCartItems() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartItemsContainer = document.getElementById('cart-items');
@@ -24,11 +23,17 @@ function renderCartItems() {
     cart.forEach((item, index) => {
         const itemElement = document.createElement('div');
         itemElement.classList.add('cart-item');
+        
+        // Fix image path for display in cart
+        const displayImagePath = item.image.startsWith('Products/') 
+            ? item.image 
+            : `Products/ProductImages/${item.image.split('/').pop()}`;
+        
         itemElement.innerHTML = `
             <p class="item-id">${item.id}</p>
             <h2 class="item-name">${item.name}</h2>
             <p class="item-price">$${item.price}</p>
-            <img src="${item.image}" alt="${item.name}" width="50" height="50">
+            <img src="${displayImagePath}" alt="${item.name}" width="50" height="50">
             <div class="quantity-controls">
                 <button class="decrease-quantity" data-index="${index}">-</button>
                 <span class="quantity">${item.quantity}</span>

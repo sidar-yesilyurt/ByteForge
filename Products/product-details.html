@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details | Byte Forge</title>
-    <link rel="stylesheet" href="Products.css">
-    <script type="module" src="../index.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <script src="/index.js"></script>
     <style>
         .product-details-container {
             max-width: 1200px;
@@ -54,11 +54,10 @@
             border-radius: 5px;
             margin: 20px 0;
         }
-
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header with Logo -->
     <header>
         <h1>Byte Forge</h1>
     </header>
@@ -69,24 +68,26 @@
             <li><a href="../index.html">Home</a></li>
             <li><a href="../Amani_Eva/About.html">About</a></li>
             <li class="dropdown">
-                <a href="#" class="dropbtn" onclick="return false;">Products</a>
+                <a href="/Products/Products.html" class="dropbtn">Products</a>
                 <ul class="nav_menu">
-                    <li><a href="PCs.html">PCs</a></li>
-                    <li><a href="Hardware.html">Hardware</a></li>
-                    <li><a href="Consoles.html">Consoles</a></li>
-                    <li><a href="Accessories.html">Accessories</a></li>
+                    <li><a href="Products/PCs.html">PCs</a></li>
+                    <li><a href="Products/Hardware.html">Hardware</a></li>
+                    <li><a href="Products/Consoles.html">Consoles</a></li>
+                    <li><a href="Products/Accessories.html">Accessories</a></li>
                 </ul>
             </li>
-            <li><a href="../FAQ.html">FAQ</a></li>
+            <li><a href="FAQ.html">FAQ</a></li>
         </ul>
 
+        <!-- Search Bar -->
         <div class="search-container">
             <input type="text" class="search-bar" placeholder="Search anything...">
         </div>
 
+        <!-- Right Side: Login, Sign Up, and Cart -->
         <div class="user-actions" id="logged-out-actions">
-            <a href="../SignUp-LogIn/auth.html?form=login" class="btn">Login</a>
-            <a href="../SignUp-LogIn/auth.html?form=signup" class="btn">Sign Up</a>
+            <a href="SignUp-LogIn/auth.html?form=login" class="btn">Login</a>
+            <a href="SignUp-LogIn/auth.html?form=signup" class="btn">Sign Up</a>
             <div class="cart">
                 <a href="../cart.html">
                     🛒 <span id="cart-count">0</span>
@@ -94,6 +95,7 @@
             </div>
         </div>
 
+        <!-- Right Side: User Name and Logout -->
         <div class="user-actions" id="logged-in-actions" style="display: none;">
             <span id="userName"></span>
             <button id="logout">Logout</button>
@@ -124,7 +126,6 @@
                 <button id="add-to-cart" class="btn btn-primary">ADD TO BASKET</button>
                 <p id="stock-status">✅ IN STOCK</p>
             </div>
-
         </div>
     </div>
 
@@ -139,9 +140,9 @@
             <div class="footer-column">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">FAQs</a></li>
+                    <li><a href="../Amani_Eva/About.html">About Us</a></li>
+                    <li><a href="Product.html">Products</a></li>
+                    <li><a href="../FAQ.html">FAQs</a></li>
                     <li><a href="#">Terms & Conditions</a></li>
                 </ul>
             </div>
@@ -155,24 +156,24 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Tech Store. All rights reserved.</p>
+            <p>&copy; 2025 ByteForge. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="storage.js"></script>
     <script>
-        // Get product ID from URL
+        // Get the product ID from the URL
         const urlParams = new URLSearchParams(window.location.search);
         const productId = parseInt(urlParams.get('id'));
         
-        // Load product data
-        const product = getProductById(productId);
+        // Find the product in all product sources
+        const product = findProductById(productId);
         
         if (product) {
-            // Update page with product details
+            // Update the page with product details
             document.getElementById('product-name').textContent = product.name;
             document.getElementById('product-price').textContent = `$${product.price.toFixed(2)}`;
-            document.getElementById('product-image').src = product.image;
+            document.getElementById('product-image').src = getCorrectImagePath(product.image);
             document.getElementById('product-image').alt = product.name;
             document.title = `${product.name} | Byte Forge`;
             
@@ -182,47 +183,83 @@
                     id: product.id,
                     name: product.name,
                     price: product.price,
-                    image: product.image
+                    image: getCorrectImagePath(product.image)
                 });
                 updateCartCount();
             });
         } else {
-            // Product not found
             document.getElementById('product-name').textContent = "Product not found";
-            document.title = "Product Not Found | Byte Forge";
         }
         
-        // Cart functions
-        function addToCart(item) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const existingItem = cart.find(cartItem => cartItem.id === item.id);
-
-        // Ensure the image path is correct
-        const correctImagePath = item.image.startsWith('Products/ProductImages/') 
-            ? item.image 
-            : `Products/ProductImages/${item.image.split('/').pop()}`;
-
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({
-                ...item,
-                quantity: 1,
-                image: correctImagePath
-            });
+        // Helper function to find product by ID in all sources
+        function findProductById(id) {
+            // First check the main products database
+            const mainProduct = getProductById(id);
+            if (mainProduct) return mainProduct;
+            
+            // Then check the index page products (if they're not in the main database)
+            const indexProducts = [
+                { id: 1, name: "Laptop", price: 999.99, image: "Products/ProductImages/laptop.JPG" },
+                { id: 2, name: "Watch", price: 499.99, image: "Products/ProductImages/watch.JPG" },
+                { id: 3, name: "Noise-Canceling Headphones", price: 129.99, image: "Products/ProductImages/headphones.JPG" },
+                { id: 4, name: "57\" Monitor 240Hz", price: 799.99, image: "Products/ProductImages/monitor.JPG" },
+                { id: 5, name: "Wireless Gaming Mouse", price: 79.99, image: "Products/ProductImages/mouse.JPG" },
+                { id: 6, name: "GeForce Graphics Card", price: 249.99, image: "Products/ProductImages/graphicscard.JPG" }
+            ];
+            
+            return indexProducts.find(p => p.id === id);
+        }
+        
+        // Helper function to ensure correct image path
+        function getCorrectImagePath(imagePath) {
+            if (!imagePath) return '';
+            
+            // If it's already a full path (http, https, or absolute path), return as-is
+            if (imagePath.startsWith('http') || imagePath.startsWith('/')) {
+                return imagePath;
+            }
+            
+            // Handle different path patterns
+            if (imagePath.includes('Products/ProductImages/')) {
+                // For products from the main products directory
+                return `../${imagePath}`;
+            } else if (imagePath.includes('ProductImages/')) {
+                // For products with relative paths
+                return `../Products/${imagePath}`;
+            } else {
+                // Default case - assume it's from ProductImages
+                return `../Products/ProductImages/${imagePath}`;
+            }
         }
 
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-}
+        // Cart functions
+        function addToCart(item) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingItem = cart.find(cartItem => cartItem.id === item.id);
+            
+            // Normalize the image path for storage in cart
+            const cartImagePath = item.image.startsWith('../') 
+                ? item.image.substring(3) // Remove leading ../
+                : item.image;
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...item,
+                    image: cartImagePath,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
         
         function updateCartCount() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const cartCount = document.getElementById('cart-count');
-            if (cartCount) {
-                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-                cartCount.textContent = totalItems;
-            }
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
         }
         
         // Initialize cart count
