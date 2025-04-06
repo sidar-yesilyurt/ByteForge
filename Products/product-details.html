@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details | Byte Forge</title>
     <link rel="stylesheet" href="../style.css">
-    <script src="/index.js"></script>
+    <script type="module" src="../index.js"></script>
     <style>
         .product-details-container {
             max-width: 1200px;
@@ -76,7 +76,7 @@
                     <li><a href="Products/Accessories.html">Accessories</a></li>
                 </ul>
             </li>
-            <li><a href="FAQ.html">FAQ</a></li>
+            <li><a href="../FAQ.html">FAQ</a></li>
         </ul>
 
         <!-- Search Bar -->
@@ -86,14 +86,15 @@
 
         <!-- Right Side: Login, Sign Up, and Cart -->
         <div class="user-actions" id="logged-out-actions">
-            <a href="SignUp-LogIn/auth.html?form=login" class="btn">Login</a>
-            <a href="SignUp-LogIn/auth.html?form=signup" class="btn">Sign Up</a>
+            <a href="../SignUp-LogIn/auth.html?form=login" class="btn">Login</a>
+            <a href="../SignUp-LogIn/auth.html?form=signup" class="btn">Sign Up</a>
             <div class="cart">
                 <a href="../cart.html">
                     🛒 <span id="cart-count">0</span>
                 </a>
             </div>
         </div>
+
 
         <!-- Right Side: User Name and Logout -->
         <div class="user-actions" id="logged-in-actions" style="display: none;">
@@ -172,7 +173,7 @@
         if (product) {
             // Update the page with product details
             document.getElementById('product-name').textContent = product.name;
-            document.getElementById('product-price').textContent = `$${product.price.toFixed(2)}`;
+            document.getElementById('product-price').textContent = `£${product.price.toFixed(2)}`;
             document.getElementById('product-image').src = getCorrectImagePath(product.image);
             document.getElementById('product-image').alt = product.name;
             document.title = `${product.name} | Byte Forge`;
@@ -197,7 +198,7 @@
             const mainProduct = getProductById(id);
             if (mainProduct) return mainProduct;
             
-            // Then check the index page products (if they're not in the main database)
+            // Then check the index page products
             const indexProducts = [
                 { id: 1, name: "Laptop", price: 999.99, image: "Products/ProductImages/laptop.JPG" },
                 { id: 2, name: "Watch", price: 499.99, image: "Products/ProductImages/watch.JPG" },
@@ -214,7 +215,7 @@
         function getCorrectImagePath(imagePath) {
             if (!imagePath) return '';
             
-            // If it's already a full path (http, https, or absolute path), return as-is
+            // If it's already a full path
             if (imagePath.startsWith('http') || imagePath.startsWith('/')) {
                 return imagePath;
             }

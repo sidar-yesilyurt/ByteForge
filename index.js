@@ -64,15 +64,87 @@ logoutButton.addEventListener('click', () => {
 // ======================
 // Carousel Functionality (only on homepage)
 // ======================
+// ======================
+// Carousel Functionality (only on homepage)
+// ======================
 if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
-    const carouselSlide = document.querySelector(".carousel-slide");
-    const carouselImages = document.querySelectorAll(".carousel-slide img");
-    
-    if (carouselSlide && carouselImages.length > 0) {
-        // ... (keep all your existing carousel code here)
-    }
-}
+    // Wait for the DOM to fully load before running the script
+    document.addEventListener("DOMContentLoaded", () => {
+        const carouselSlide = document.querySelector(".carousel-slide");
+        const carouselImages = document.querySelectorAll(".carousel-slide img");
+        const prevButton = document.querySelector(".carousel-button.prev");
+        const nextButton = document.querySelector(".carousel-button.next");
 
+        // Check if carousel images exist
+        if (carouselImages.length === 0) {
+            return; // Stop execution if no images are found
+        }
+
+        let counter = 1; // Start at the first actual image (since we add clones)
+        let imageWidth = carouselImages[0].clientWidth;
+
+        // Clone first and last images for infinite looping effect
+        const firstClone = carouselImages[0].cloneNode(true);
+        const lastClone = carouselImages[carouselImages.length - 1].cloneNode(true);
+
+        firstClone.id = "first-clone";
+        lastClone.id = "last-clone";
+
+        carouselSlide.appendChild(firstClone);
+        carouselSlide.prepend(lastClone);
+
+        const allImages = document.querySelectorAll(".carousel-slide img");
+
+        // Set correct width for images & container
+        function setSize() {
+            imageWidth = carouselSlide.clientWidth; // Set width to match container
+            allImages.forEach(img => {
+                img.style.width = `${imageWidth}px`; // Ensure all images fit properly
+            });
+            carouselSlide.style.transform = `translateX(${-imageWidth * counter}px)`;
+        }
+
+        // Ensure proper image display at start
+        setSize();
+
+        // Resize fix on different screens
+        window.addEventListener("resize", setSize);
+
+        // Move to next slide
+        nextButton.addEventListener("click", () => {
+            if (counter >= allImages.length - 1) return;
+            counter++;
+            moveSlide();
+        });
+
+        // Move to previous slide
+        prevButton.addEventListener("click", () => {
+            if (counter <= 0) return;
+            counter--;
+            moveSlide();
+        });
+
+        // Function to handle slide movement
+        function moveSlide() {
+            carouselSlide.style.transition = "transform 0.5s ease-in-out";
+            carouselSlide.style.transform = `translateX(${-imageWidth * counter}px)`;
+        }
+
+        // Smooth looping transition
+        carouselSlide.addEventListener("transitionend", () => {
+            if (allImages[counter].id === "first-clone") {
+                carouselSlide.style.transition = "none";
+                counter = 1;
+                carouselSlide.style.transform = `translateX(${-imageWidth * counter}px)`;
+            }
+            if (allImages[counter].id === "last-clone") {
+                carouselSlide.style.transition = "none";
+                counter = allImages.length - 2;
+                carouselSlide.style.transform = `translateX(${-imageWidth * counter}px)`;
+            }
+        });
+    });
+}
 // ======================
 // Homepage Products (only on index.html)
 // ======================
@@ -126,7 +198,7 @@ if (window.location.pathname.endsWith('index.html') || window.location.pathname 
                 <a href="Products/product-details.html?id=${product.id}">
                     <img src="${product.image}" alt="${product.name}" width="100" height="200">
                     <h3>${product.name}</h3>
-                    <p>$${product.price}</p>
+                    <p>£${product.price}</p>
                 </a>
                 <button class="btn add-to-cart" data-id="${product.id}">Add to Cart</button>
             `;
