@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <a href="product-details.html?id=${product.id}" class="product-link">
                     <img src="${product.image}" alt="${product.name}" width="100" height="200">
                     <h3>${product.name}</h3>
-                    <p>$${product.price.toFixed(2)}</p>
+                    <p>£${product.price.toFixed(2)}</p>
                 </a>
                 <button class="btn add-to-cart" data-id="${product.id}">Add to Cart</button>
             </div>
