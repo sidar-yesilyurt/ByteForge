@@ -3,6 +3,10 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-image: url('../main-background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 /* Header */
 header {
@@ -17,10 +21,14 @@ header {
 
 body {
     font-family: Arial, sans-serif;
-    background-color: white;
+    background-color: transparent;
     color: black;
     display: flex;
     flex-direction: column;
+    background-image: url('../main-background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 /* General Styling */
@@ -32,7 +40,7 @@ nav {
   }
   
   nav a {
-    color: black;
+    color: #333;
     text-decoration: none;
     padding: 10px 15px;
   }
@@ -55,7 +63,7 @@ nav {
     padding: 0;
     margin: 0;
     display: flex;
-    background-color: #000;
+    background-color: #333;
 }
 
 .navbar ul li {
@@ -86,7 +94,7 @@ nav {
 .dropdown .nav_menu {
     display: none;
     position: absolute;
-    background-color: black;
+    background-color: #333;
     min-width: 90px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -271,6 +279,7 @@ footer {
 
 h1, h2 {
     text-align: center;
+    color: white;
 }
 
 p {
@@ -280,7 +289,6 @@ p {
 
 .faq-section {
     margin-top: 40px;
-    background-color: #f9f9f9;
     padding: 40px 0;
 }
 
@@ -288,15 +296,19 @@ p {
     margin-bottom: 20px;
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
+    background-color: white;
+    border-radius: 10px
 }
 
 .faq-item h3 {
     color: #007bff;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .faq-item p {
     color: #666;
+    text-align: center;
 }
 
 .footer-container{
@@ -308,4 +320,106 @@ p {
     font-size: 16px; /* Adjust font size if needed */
     margin-right: 10px; /* Add some spacing between the name and the logout button */
     font-weight: bold; /* Optional: Make the text bold */
+}
+
+/* Updated responsive adjustments */
+@media screen and (max-width: 1400px) {
+    .carousel-container {
+        max-width: 90%;
+        aspect-ratio: 16 / 9;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .carousel-container {
+        max-width: 95%;
+        aspect-ratio: 16 / 8; /* Slightly different aspect ratio for tablets */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .carousel-container {
+        max-width: 98%;
+        aspect-ratio: 16 / 7; /* More compact for mobile */
+    }
+    
+    .carousel-button {
+        padding: 0.5rem; /* Smaller buttons on mobile */
+        font-size: 1rem;
+    }
+}
+
+/* Responsive navbar adjustments for screen widths below 1100px */
+@media screen and (max-width: 1100px) {
+    /* Adjust the navbar to be more compact */
+    .navbar {
+        padding: 5px 10px;
+    }
+    
+    /* Make the search bar smaller */
+    .search-container {
+        padding-right: 0;
+        margin: 0 10px;
+    }
+    
+    .search-bar {
+        width: 200px;
+    }
+    
+    /* Adjust spacing of user actions */
+    .user-actions .btn {
+        padding: 6px 10px;
+        font-size: 14px;
+        margin-left: 5px;
+    }
+    
+    /* Make the username display smaller */
+    #userName {
+        font-size: 14px;
+        margin-right: 5px;
+    }
+    
+    /* Adjust the logout button */
+    #logout {
+        padding: 6px 10px;
+        font-size: 14px;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    /* Adjust the cart styling */
+    .cart {
+        margin-left: 5px;
+    }
+}
+
+/* For even smaller screens */
+@media screen and (max-width: 800px) {
+    /* Stack the navbar components vertically if needed */
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    .navbar ul {
+        margin-bottom: 10px;
+    }
+    
+    .search-container {
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    .search-bar {
+        width: 90%;
+    }
+    
+    .user-actions {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
 }
