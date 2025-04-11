@@ -1,15 +1,16 @@
 /* General Styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: blue;
     margin: 0;
     padding: 0;
-    text-align: center;
+    background-color: blue;
     background-image: url('main-background.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
 }
+
+
 
 /* Header */
 header {

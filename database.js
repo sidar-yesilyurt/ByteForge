@@ -44,7 +44,7 @@ onAuthStateChanged(auth, (user) => {
 
         // Update cart count when user logs in
         console.log("User logged in. Updating cart count..."); // Debugging
-        updateCartCount(); // Ensure this line is present
+        updateCartCount();
     } else {
         // User is signed out
         loggedOutActions.style.display = 'flex';
