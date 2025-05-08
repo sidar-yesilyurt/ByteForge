@@ -64,9 +64,6 @@ logoutButton.addEventListener('click', () => {
 // ======================
 // Carousel Functionality (only on homepage)
 // ======================
-// ======================
-// Carousel Functionality (only on homepage)
-// ======================
 if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/') {
     // Wait for the DOM to fully load before running the script
     document.addEventListener("DOMContentLoaded", () => {

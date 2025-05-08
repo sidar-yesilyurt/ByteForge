@@ -159,9 +159,25 @@ header {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
-    text-align: left; /* Align text to the left */
+    text-align: left;
+    position: relative;
 }
 
+#loginMessage {
+    display: none;
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    font-size: 0.9em;
+    text-align: center;
+    box-sizing: border-box;
+}
 .login-container h2 {
     margin-bottom: 20px;
     font-size: 24px;

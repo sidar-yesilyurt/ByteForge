@@ -78,6 +78,7 @@ loginForm.addEventListener('submit', (e) => {
             window.location.href = '../index.html'; // Redirect to homepage
         })
         .catch((error) => {
+            alert("Invalid login credentials. Please try again.");
             loginMessage.style.display = 'block';
             loginMessage.innerText = error.message;
         });
@@ -142,3 +143,4 @@ function showMessage(message, divId) {
         messageDiv.style.opacity = 0;
     }, 5000);
 }
+
