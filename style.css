@@ -246,6 +246,7 @@ nav {
     color: white;
 }
 
+
 .product-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 columns */
@@ -261,16 +262,26 @@ nav {
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content horizontally */
-    text-align: center; /* Center text */
-    
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease; /* Add smooth transform */
+}
+
+.product:hover {
+    transform: scale(1.05); /* Slightly scale up on hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
 }
 
 .product img {
     width: 100%;
     border-radius: 10px;
-    max-height: 200px; /* Limit image height */
-    object-fit: contain; /* Ensure image fits within bounds */
+    max-height: 200px;
+    object-fit: contain;
+    transition: opacity 0.3s ease; /* Add opacity transition */
+}
+
+.product:hover img {
+    opacity: 0.9; /* Slightly reduce opacity on hover */
 }
 
 .product h3 {
@@ -278,6 +289,11 @@ nav {
     font-size: 18px;
     text-decoration: none;
     color: black;
+    transition: color 0.3s ease; /* Add color transition */
+}
+
+.product:hover h3 {
+    color: #0056b3; /* Change color on hover */
 }
 
 .product p {
@@ -305,7 +321,6 @@ nav {
 .product .btn:hover {
     background-color: #ffcc00;
 }
-
 /* Cart Item Styling */
 .cart-item {
     border-bottom: 1px solid #ccc;
