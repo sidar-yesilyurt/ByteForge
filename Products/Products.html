@@ -102,6 +102,25 @@
 <!-- Then load product scripts -->
 <script src="storage.js"></script>
 <script src="products.js"></script>
-
+        <!-- Chatbox -->
+    <div class="chatbox">
+        <div class="chatbox-header">
+            <span>Chat with us</span>
+            <button class="chatbox-toggle">-</button>
+        </div>
+        <div class="chatbox-body">
+            <form id="chat-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="question">Question:</label>
+                    <textarea id="question" name="question" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="chatbox-submit">Send</button>
+            </form>
+        </div>
+    </div>
 </body>
 </HTML>

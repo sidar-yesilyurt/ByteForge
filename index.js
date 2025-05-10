@@ -215,7 +215,7 @@ if (window.location.pathname.endsWith('index.html') || window.location.pathname 
 }
 
 // ======================
-// Cart Functions (global)
+// Cart Functions
 // ======================
 function addToCart(item) {
     console.log("Adding item to cart:", item); // Debugging: Log the item being added
@@ -241,12 +241,6 @@ window.updateCartCount = function() {
     if (cartCountLoggedOut) cartCountLoggedOut.textContent = totalItems;
     if (cartCountLoggedIn) cartCountLoggedIn.textContent = totalItems;
 };
-
-// Initialize on auth state change
-onAuthStateChanged(auth, (user) => {
-    // ... your existing auth code
-    updateCartCount(); // Add this line
-});
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', updateCartCount);

@@ -233,6 +233,90 @@ header {
     background-color: #ffcc00;
 }
 
+.chatbox {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background-color: #1a1a1a;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(0);
+}
+
+.chatbox.collapsed {
+    height: 300px;
+}
+
+.chatbox-header {
+    background-color: #0066cc;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.chatbox-header span {
+    font-size: 1rem;
+}
+
+.chatbox-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.chatbox-body {
+    padding: 10px;
+    display: none;
+}
+
+.chatbox-body.open {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: #333;
+    color: white;
+}
+
+.chatbox-submit {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px; /* Add some spacing */
+    font-size: 1rem;
+}
+
+.chatbox-submit:hover {
+    background-color: #005bb5; /* Darker shade on hover */
+}
+
+
 /* Footer */
 footer {
     background: #222;

@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechVault</title>
     <link rel="stylesheet" href="Products.css">
-    <script type="module" src="../index.js"></script>
-
 </head>
 <body>
     <!-- Header with Logo -->
@@ -14,13 +12,14 @@
         <h1>Byte Forge</h1>
     </header>
 
+    
     <!-- Navigation Bar -->
     <nav class="navbar">
         <ul>
             <li><a href="../index.html">Home</a></li>
             <li><a href="../Amani_Eva/About.html">About</a></li>
             <li class="dropdown">
-                <a href="Products.html">Products</a>
+                <a href="#" class="dropbtn" onclick="return false;">Products</a>
                 <ul class="nav_menu">
                     <li><a href="PCs.html">PCs</a></li>
                     <li><a href="Hardware.html">Hardware</a></li>
@@ -30,6 +29,7 @@
             </li>
             <li><a href="../FAQ.html">FAQ</a></li>
         </ul>
+        
 
         <!-- Search Bar -->
         <div class="search-container">
@@ -60,10 +60,11 @@
         </div>
     </nav>
 
-    <!-- Product Grid -->
-    <div class="product-grid">
+    <div id="product-grid" class="product-grid">
         <!-- Products will be dynamically inserted here -->
     </div>
+
+
 
     <!-- Footer -->
     <footer>
@@ -96,9 +97,30 @@
         </div>
     </footer>
 
-    <!-- Include JavaScript Files -->
-    <script src="storage.js"></script>
-    <script src="products.js"></script>
-    <script src="../cart.js"></script>
+<!-- Load index.js first for global functions -->
+<script type="module" src="../index.js"></script>
+<!-- Then load product scripts -->
+<script src="storage.js"></script>
+<script src="products.js"></script>
+        <!-- Chatbox -->
+    <div class="chatbox">
+        <div class="chatbox-header">
+            <span>Chat with us</span>
+            <button class="chatbox-toggle">-</button>
+        </div>
+        <div class="chatbox-body">
+            <form id="chat-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="question">Question:</label>
+                    <textarea id="question" name="question" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="chatbox-submit">Send</button>
+            </form>
+        </div>
+    </div>
 </body>
 </HTML>
